@@ -12,7 +12,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "Appendix", dependencies: []),
-        .testTarget(name: "AppendixTests", dependencies: ["Appendix"]),
     ],
     swiftLanguageVersions: [
         .version("5.1")
