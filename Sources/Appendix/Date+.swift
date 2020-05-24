@@ -1,34 +1,34 @@
 import Foundation
 
-public extension Date {
+extension Date {
     
     /// Format used in SQLite tables.
-    static let SQLITE_FORMAT = "yyyy-MM-dd HH:mm:ss+00:00"
+    public static let SQLITE_FORMAT = "yyyy-MM-dd HH:mm:ss+00:00"
     
     /// Format for when you just want an integer of the date.
-    static let DATE_INTEGER_FORMAT = "yyyyMMdd"
+    public static let DATE_INTEGER_FORMAT = "yyyyMMdd"
     
     /// Returns format appropriate for Sqlite3 (e.g. 2006-01-02 15:06:00+00:00)
-    var sqliteFormat: String {
+    public var sqliteFormat: String {
         return format(Self.SQLITE_FORMAT)
     }
     
     /// Returns a weekday integer 1 through 7 — 1 is Monday
-    var weekdayInt: Int {
+    public var weekdayInt: Int {
         let calendar = Calendar(identifier: .gregorian)
         let day = calendar.component(.weekday, from: self)
         return (day == 1) ? 7 : day - 1
     }
     
     /// Returns a month integer 1 through 12 — 1 is January.
-    var monthInt: Int {
+    public var monthInt: Int {
         let calendar = Calendar(identifier: .gregorian)
         let month = calendar.component(.month, from: self)
         return month
     }
     
     /// Returns a date integer (i.e. 20200501)
-    var dateInt: Int {
+    public var dateInt: Int {
         return Int(format(Self.DATE_INTEGER_FORMAT)) ?? 0
     }
     
@@ -97,14 +97,14 @@ public extension Date {
         ZZZZZ   -06:00
         ```
     */
-    func format(_ format: String) -> String {
+    public func format(_ format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
     
     /// Returns a date for a given date format
-    static func parse(_ date: String, format: String) -> Date? {
+    public static func parse(_ date: String, format: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.date(from: date)

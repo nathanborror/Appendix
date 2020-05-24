@@ -1,8 +1,8 @@
 import Foundation
 
-public extension String {
+extension String {
     
-    var utf8String: UnsafePointer<Int8>? {
+    public var utf8String: UnsafePointer<Int8>? {
         return (self as NSString).utf8String
     }
 }
