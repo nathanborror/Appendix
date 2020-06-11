@@ -8,6 +8,11 @@ extension Date {
     /// Format for when you just want an integer of the date.
     public static let DATE_INTEGER_FORMAT = "yyyyMMdd"
     
+    /// Returns an integer representing the current UNIX epoch.
+    public static var unixEpoch: Int {
+        return Int(Date().timeIntervalSince1970)
+    }
+    
     /// Returns format appropriate for Sqlite3 (e.g. 2006-01-02 15:06:00+00:00)
     public var sqliteFormat: String {
         return format(Self.SQLITE_FORMAT)
