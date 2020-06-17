@@ -31,6 +31,29 @@ extension FileManager {
         try FileManager.default.copyItem(atPath: filename, toPath: newFilename)
     }
     
+    public static func url(for path: FileManager.SearchPathDirectory, folder: String? = nil, filename: String? = nil) -> URL? {
+        guard var dir = try? FileManager.default.url(for: path, in: .userDomainMask, appropriateFor: nil, create: true) else {
+            return nil
+        }
+        if let folder = folder {
+            dir.appendPathComponent(folder, isDirectory: true)
+            if FileManager.default.fileExists(atPath: dir.path) == false {
+                do {
+                    try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+                } catch {
+                    print(error)
+                    return nil
+                }
+            }
+        }
+        if let filename = filename {
+            dir.appendPathComponent(filename)
+        }
+        return dir
+    }
+    
+    // MARK: - Standard Directories
+    
     public static var document: String {
         NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
